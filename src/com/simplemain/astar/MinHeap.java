@@ -21,6 +21,7 @@ public class MinHeap
 		Data last = queue.get(endPnt - 1);
 		queue.set(0, last);
 		endPnt--;
+		index.remove(getKey(head.point));
 		
 		topDown();
 		

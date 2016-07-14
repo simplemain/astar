@@ -160,8 +160,8 @@ public class Main
 	 */
 	static double h(Point pnt)
 	{
-		return hBFS(pnt);
-//		return hEuclidianDistance(pnt);
+//		return hBFS(pnt);
+		return hEuclidianDistance(pnt);
 //		return hPowEuclidianDistance(pnt);
 //		return hManhattanDistance(pnt);
 	}
