@@ -25,13 +25,13 @@ public class Main
 		". . . . . . . . . . . . . . . . . E . ."
 	};
 	
-	// 地图
+	// 地图生成
 	static char[][] MAP    = new char[S_MAP[0].replace(" ", "").length()][S_MAP.length];
 	// 地图最大尺寸
 	static Point MAX_PNT   = new Point(MAP.length, MAP[0].length);
-	// 起点
+	// 设置起点
 	static Point START_PNT = null;
-	// 终点
+	// 设置终点
 	static Point END_PNT   = null;
 	
 	public static void main(String[] args)
@@ -45,28 +45,28 @@ public class Main
 	}
 
 	/**
-	 * 用地图字符串产生地图数据
+	 * 利用地图字符串产生地图数据
 	 */
 	static void genMap()
 	{
-		int idx = 0;
+		int num = 0;
 		for (String s : S_MAP)
 		{
 			char[] cs = s.replace(" ", "").toCharArray();
 			for (int i = 0; i < cs.length; i++)
 			{
-				MAP[i][idx] = cs[i];
+				MAP[i][num] = cs[i];
 				switch (cs[i])
 				{
 				case START:
-					START_PNT = new Point(i, idx);
+					START_PNT = new Point(i, num);
 					break;
 				case END:
-					END_PNT = new Point(i, idx);
+					END_PNT = new Point(i, num);
 					break;
 				}
 			}
-			idx++;
+			num++;
 		}
 	}
 

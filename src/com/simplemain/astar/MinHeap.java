@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class MinHeap
 {
-	private final ArrayList<Data> queue = new ArrayList<>();
-	private int endPnt = 0;
-	private final Map<String, Data> index = new HashMap<>();
+	private final ArrayList<Data> queue = new ArrayList<>();  // 用于存储堆的数组列表
+	private int endPnt = 0;  // 标记堆的尾部位置
+	private final Map<String, Data> index = new HashMap<>();  // 用于快速查找堆中元素的映射
 	
 	public Data getAndRemoveMin()
 	{
@@ -17,13 +17,13 @@ public class MinHeap
 			return null;
 		}
 		
-		Data head = queue.get(0);
-		Data last = queue.get(endPnt - 1);
-		queue.set(0, last);
+		Data head = queue.get(0);  // 获取堆的最小元素
+		Data last = queue.get(endPnt - 1);  // 获取堆的最后一个元素
+		queue.set(0, last);  // 将最后一个元素放到堆顶
 		endPnt--;
-		index.remove(getKey(head.point));
+		index.remove(getKey(head.point));  // 从映射中移除堆的最小元素
 		
-		topDown();
+		topDown();  // 重新构建堆
 		
 		return head;
 	}
@@ -31,7 +31,7 @@ public class MinHeap
 	public Data find(Point pnt)
 	{
 		return index.get(getKey(pnt));
-	}
+	}  // 在映射中查找指定点的数据对象
 	
 	public void add(Data data)
 	{
@@ -45,7 +45,7 @@ public class MinHeap
 		}
 		endPnt++;
 		
-		index.put(getKey(data.point), data);
+		index.put(getKey(data.point), data);  // 在映射中添加点和数据对象的映射关系
 		
 		bottomUp();
 	}
@@ -58,7 +58,7 @@ public class MinHeap
 	private String getKey(Point pnt)
 	{
 		return String.format("%d-%d", pnt.x, pnt.y);
-	}
+	}  // 根据点的坐标生成映射的键值
 	
 	private void topDown()
 	{
@@ -73,18 +73,18 @@ public class MinHeap
 			
 			int next = -1;
 			Data dn = dc;
-			if (dl != null && dl.f() < dn.f())
+			if (dl != null && dl.f() < dn.f())  // 如果左子节点存在且左子节点的f值小于当前节点的f值
 			{
 				next = left;
 				dn = dl;
 			}
-			if (dr != null && dr.f() < dn.f())
+			if (dr != null && dr.f() < dn.f())  // 如果右子节点存在且右子节点的f值小于当前节点和左子节点的f值
 			{
 				next = right;
 				dn = dr;
 			}
 			
-			if (next >= 0 && next < endPnt)
+			if (next >= 0 && next < endPnt)  // 如果存在需要交换的子节点
 			{
 				queue.set(next, dc);
 				queue.set(cur, dn);
@@ -112,7 +112,7 @@ public class MinHeap
 			Data dc = queue.get(cur);
 			Data dp = queue.get(parent);
 			
-			if (dc.f() < dp.f())
+			if (dc.f() < dp.f())   // 如果当前节点的f值小于父节点的f值
 			{
 				queue.set(parent, dc);
 				queue.set(cur, dp);
